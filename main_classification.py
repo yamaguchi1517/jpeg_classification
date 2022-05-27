@@ -22,7 +22,6 @@ from models.classification_lstm import Classification_lstm
 from utils.device import AutoDevice
 from utils.transforms.to_tensor import ToTensor
 from utils.transforms.encode import EncodeJPEG
-from utils.transforms.add_noise import RandomMASK, MultNORM, UniformOR, RandomFLIP
 from utils.transforms.padding import PadSequence
 
 parser = argparse.ArgumentParser(
@@ -138,7 +137,7 @@ train_tfs.extend([
 test_tfs.extend([
     transforms.Resize(32),
     ToTensor(),
-    EncodeJPEG(),
+    EncodeJPEG()
 ])
 
 if args.dataset == 'mnist' or 'fashion_mnist':
