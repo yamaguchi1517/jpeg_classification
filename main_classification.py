@@ -11,7 +11,6 @@ from time import perf_counter
 from tqdm import tqdm
 import numpy as np
 
-# PyTorchパッケージとそのサブモジュール
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -19,7 +18,6 @@ import torch.utils.data
 import torchvision.datasets as dset
 import torchvision.transforms as transforms
 
-# 自作パッケージ
 from models.classification_lstm import Classification_lstm
 from utils.device import AutoDevice
 from utils.transforms.to_tensor import ToTensor
@@ -28,7 +26,7 @@ from utils.transforms.add_noise import RandomMASK, MultNORM, UniformOR, RandomFL
 from utils.transforms.padding import PadSequence
 
 parser = argparse.ArgumentParser(
-    prog='プライバシー保護に応用したJPEGデータの機械学習',
+    prog='JPEGデータの機械学習',
     description='PyTorchを用いてMNIST/FashionMNIST/cifar10の画像分類を行います。'
 )
 parser.add_argument(
@@ -100,7 +98,7 @@ basicConfig(
 
 logger = getLogger('main')
 
-# テスト時は何度エポックを回しても結果は同じなので、エポック数を1に強制する
+# テスト時はエポック数を1に強制
 if args.test:
     args.epochs = 1
     logger.info('テストモードで実行されているためエポック数を1に設定しました。')
@@ -134,11 +132,7 @@ test_tfs = []
 train_tfs.extend([
     transforms.RandomResizedCrop(32, scale=(0.5, 1.0), ratio=(3 / 4, 4 / 3)),
     ToTensor(),
-    EncodeJPEG(),
-    #ビット変換を加える際は、以下のいずれか一つを用いる
-    #RandomMASK()
-    #MultNORM()
-    #RandomFLIP()
+    EncodeJPEG()
 ])
 
 test_tfs.extend([
