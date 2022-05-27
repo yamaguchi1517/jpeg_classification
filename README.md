@@ -29,6 +29,8 @@ $ python3 main_classification.py --help
 $ python3 main_classification.py --dataset mnist --epochs 500
 ```
 
+その他のコマンドライン引数はヘルプを参照してください。
+
 # 参考
 ## Webページ
 
